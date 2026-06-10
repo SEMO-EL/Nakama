@@ -228,6 +228,70 @@
     <span>3D prototype build</span>
   </footer>
 
+
+  <script>
+    // Critical intro fallback: runs before the 3D module so the side choice always works.
+    (function () {
+      function ready(fn) {
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", fn);
+        } else {
+          fn();
+        }
+      }
+
+      ready(function () {
+        var root = document.documentElement;
+        var body = document.body;
+        var gate = document.getElementById("gate");
+        var sideToggle = document.getElementById("sideToggle");
+
+        function setTheme(side) {
+          root.setAttribute("data-theme", side);
+          var word = document.querySelector(".theme-word");
+          if (word) word.textContent = side === "black" ? "Black" : "White";
+        }
+
+        function enter(side) {
+          setTheme(side);
+          if (gate) gate.classList.add("hide");
+          body.classList.remove("lock");
+          window.__nakamaGateEntered = true;
+          window.__nakamaTheme = side;
+        }
+
+        body.classList.add("lock");
+
+        if (gate) {
+          gate.querySelectorAll("[data-side]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              enter(btn.getAttribute("data-side") || "black");
+            });
+          });
+
+          var black = gate.querySelector(".gate-black");
+          var white = gate.querySelector(".gate-white");
+
+          if (black) {
+            black.addEventListener("mouseenter", function () { gate.style.setProperty("--black-width", "68%"); });
+          }
+          if (white) {
+            white.addEventListener("mouseenter", function () { gate.style.setProperty("--black-width", "32%"); });
+          }
+          gate.addEventListener("mouseleave", function () { gate.style.setProperty("--black-width", "50%"); });
+        }
+
+        if (sideToggle) {
+          sideToggle.addEventListener("click", function () {
+            var next = root.getAttribute("data-theme") === "black" ? "white" : "black";
+            setTheme(next);
+            window.__nakamaTheme = next;
+          });
+        }
+      });
+    })();
+  </script>
+
   <script type="module" src="script.js"></script>
 </body>
 </html>
