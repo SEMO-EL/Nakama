@@ -10,7 +10,7 @@ const cursorAura = document.getElementById("cursorAura");
 const canvas = document.getElementById("katanaCanvas");
 const fallback = document.getElementById("canvasFallback");
 
-let theme = "black";
+let theme = window.__nakamaTheme || document.documentElement.dataset.theme || "black";
 let model, mixer;
 let targetRot = { x: 0, y: 0 };
 let mouse = { x: 0, y: 0 };
@@ -19,28 +19,39 @@ let scrollProgress = 0;
 function setTheme(next) {
   theme = next;
   root.dataset.theme = next;
-  document.querySelector(".theme-word").textContent = next === "black" ? "Black" : "White";
+  window.__nakamaTheme = next;
+  const word = document.querySelector(".theme-word");
+  if (word) word.textContent = next === "black" ? "Black" : "White";
 }
 
 function enter(side) {
   setTheme(side);
-  gate.classList.add("hide");
+  if (gate) gate.classList.add("hide");
   body.classList.remove("lock");
+  window.__nakamaGateEntered = true;
+  window.__nakamaTheme = side;
 }
 
-body.classList.add("lock");
-gate.querySelectorAll("[data-side]").forEach(btn => {
-  btn.addEventListener("click", () => enter(btn.dataset.side));
-});
+if (!window.__nakamaGateEntered) body.classList.add("lock");
+// Gate click/hover has a non-module fallback in index.html.
+// This module only adds the same behavior if the fallback did not run.
+if (gate && !window.__nakamaGateEntered) {
+  gate.querySelectorAll("[data-side]").forEach(btn => {
+    btn.addEventListener("click", () => enter(btn.dataset.side));
+  });
+}
 
-toggle.addEventListener("click", () => setTheme(theme === "black" ? "white" : "black"));
+if (toggle) {
+  toggle.addEventListener("click", () => setTheme(theme === "black" ? "white" : "black"));
+}
 
-gate.addEventListener("mouseenter", () => {}, true);
-const blackGate = gate.querySelector(".gate-black");
-const whiteGate = gate.querySelector(".gate-white");
-blackGate.addEventListener("mouseenter", () => gate.style.setProperty("--split-line", "67.2%"));
-whiteGate.addEventListener("mouseenter", () => gate.style.setProperty("--split-line", "32.8%"));
-gate.addEventListener("mouseleave", () => gate.style.setProperty("--split-line", "50%"));
+if (gate) {
+  const blackGate = gate.querySelector(".gate-black");
+  const whiteGate = gate.querySelector(".gate-white");
+  if (blackGate) blackGate.addEventListener("mouseenter", () => gate.style.setProperty("--black-width", "68%"));
+  if (whiteGate) whiteGate.addEventListener("mouseenter", () => gate.style.setProperty("--black-width", "32%"));
+  gate.addEventListener("mouseleave", () => gate.style.setProperty("--black-width", "50%"));
+}
 
 window.addEventListener("pointermove", (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
