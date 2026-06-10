@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="black">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NAKAMA STORE — Dragon Blades 3D</title>
+  <meta name="description" content="Nakama Store Morocco — cinematic 3D katana experience." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Yuji+Syuku&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <div class="cursor-aura" id="cursorAura"></div>
+
+  <aside class="scene" aria-hidden="true">
+    <img class="scene-bg bg-black" src="assets/images/black-dragon-bg.png" alt="">
+    <img class="scene-bg bg-white" src="assets/images/white-dragon-bg.png" alt="">
+    <div class="scene-vignette"></div>
+    <div class="scene-grain"></div>
+    <canvas id="katanaCanvas"></canvas>
+    <img id="canvasFallback" class="canvas-fallback" src="assets/images/pbr-katana-preview.png" alt="">
+  </aside>
+
+  <header class="nav" id="nav">
+    <a class="brand" href="#hero" aria-label="Nakama Home">
+      <span class="brand-kanji">仲間</span>
+      <span>NAKAMA</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#blade">3D Blade</a>
+      <a href="#armory">Armory</a>
+      <a href="#lore">Lore</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="side-toggle" id="sideToggle" type="button">Switch side</button>
+  </header>
+
+  <main>
+    <section class="gate" id="gate" aria-label="Choose your side">
+      <button class="gate-side gate-black" data-side="black" type="button">
+        <span class="gate-top">黒 龍 · THE ORIGINAL</span>
+        <span class="gate-kanji">黒龍</span>
+        <span class="gate-title">Black Dragon</span>
+        <span class="gate-sub">Forged in shadow</span>
+        <span class="gate-cta">Unveil the dark</span>
+      </button>
+      <button class="gate-side gate-white" data-side="white" type="button">
+        <span class="gate-top">白 龍 · NEW · SOON</span>
+        <span class="gate-kanji">白龍</span>
+        <span class="gate-title">White Dragon</span>
+        <span class="gate-sub">Born of light</span>
+        <span class="gate-cta">Step into light</span>
+      </button>
+      <div class="gate-divider"></div>
+      <div class="gate-vs">VS</div>
+    </section>
+
+    <section class="hero section" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">3D visual drop · Morocco</p>
+        <h1><span class="theme-word">Black</span><br>Dragon</h1>
+        <p class="lead">
+          A cinematic katana showcase built around motion, atmosphere, and a real web-ready 3D model.
+          Scroll to rotate the blade, switch sides, and explore the Nakama arsenal.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-main" href="#blade">Explore 3D</a>
+          <a class="btn btn-ghost" href="#armory">View armory</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div>
+          <span>Model</span>
+          Damascus steel katana GLB
+        </div>
+        <div>
+          <span>Mode</span>
+          Interactive product reveal
+        </div>
+        <div>
+          <span>Location</span>
+          Marrakech · Maroc
+        </div>
+      </div>
+      <p class="scroll-hint">Scroll · 回転</p>
+    </section>
+
+    <section class="blade section panel-bg" id="blade">
+      <div class="section-head">
+        <p class="eyebrow">The blade</p>
+        <h2>Not a flat image. A moving product world.</h2>
+      </div>
+      <div class="story-grid">
+        <article class="story-card">
+          <span class="num">01</span>
+          <h3>Live 3D focus</h3>
+          <p>The central katana is loaded as a GLB model and reacts to scroll and pointer movement.</p>
+        </article>
+        <article class="story-card">
+          <span class="num">02</span>
+          <h3>Dragon atmosphere</h3>
+          <p>Dark crimson smoke for Black Dragon. Pearl-and-gold mist for White Dragon.</p>
+        </article>
+        <article class="story-card">
+          <span class="num">03</span>
+          <h3>Replace-ready</h3>
+          <p>When the real product photos arrive, drop them into the assets folder without rebuilding the layout.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="transition-copy section color-panel">
+      <div class="huge-line">3D STORYTELLING</div>
+      <p>
+        Inspired by high-end interactive studios: less catalogue, more product universe.
+      </p>
+    </section>
+
+    <section class="armory section panel-bg" id="armory">
+      <div class="section-head center">
+        <p class="eyebrow">Selected swords</p>
+        <h2>The arsenal stays split in two worlds.</h2>
+        <p class="section-note">Temporary SVG/product placeholders now. Real product photos later.</p>
+      </div>
+
+      <div class="armory-block">
+        <div class="armory-title">
+          <span>黒龍</span>
+          <h3>Black Dragon Armory</h3>
+        </div>
+        <div class="sword-grid">
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade dark"></div>
+            <h4>Shusui</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade ember"></div>
+            <h4>Enma · Black</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade steel"></div>
+            <h4>Yubashiri</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade gold"></div>
+            <h4>Sakai Katana</h4>
+            <p>Ghost of Tsushima</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade void"></div>
+            <h4>Zangetsu · Bankai</h4>
+            <p>Bleach</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="armory-block white-block">
+        <div class="armory-title">
+          <span>白龍</span>
+          <h3>White Dragon Armory</h3>
+        </div>
+        <div class="sword-grid">
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade pearl"></div>
+            <h4>Wado Ichimonji</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade redline"></div>
+            <h4>Sandai Kitetsu</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade violet"></div>
+            <h4>Enma · Purple</h4>
+            <p>One Piece · Zoro</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade law"></div>
+            <h4>Kikoku</h4>
+            <p>Trafalgar Law</p>
+          </article>
+          <article class="sword-card" data-tilt>
+            <div class="mini-blade flame"></div>
+            <h4>Rengoku Flame</h4>
+            <p>Demon Slayer</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="lore section color-panel" id="lore">
+      <div class="lore-wrap">
+        <p class="eyebrow">Lore</p>
+        <h2>Choose a side. Carry the story.</h2>
+        <p>
+          The goal is not only to sell wooden katanas. It is to make the visitor feel like
+          they entered a cinematic anime-inspired universe before they ever message the store.
+        </p>
+        <div class="lore-images">
+          <img src="assets/images/black-dragon-product.png" alt="Black Dragon visual">
+          <img src="assets/images/white-dragon-product.png" alt="White Dragon visual">
+        </div>
+      </div>
+    </section>
+
+    <section class="contact section panel-bg" id="contact">
+      <div class="contact-card">
+        <p class="eyebrow">Order flow</p>
+        <h2>Ready for WhatsApp-first selling.</h2>
+        <p>Replace the phone number in `index.html`, add real prices, and swap in real product photos when the owner shoots them.</p>
+        <div class="hero-actions">
+          <a class="btn btn-main" href="https://wa.me/212600000000" target="_blank" rel="noreferrer">Order on WhatsApp</a>
+          <a class="btn btn-ghost" href="https://www.instagram.com/nakama_store_morocco/" target="_blank" rel="noreferrer">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>NAKAMA STORE</span>
+    <span>Marrakech · Maroc</span>
+    <span>3D prototype build</span>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
