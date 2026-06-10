@@ -315,3 +315,64 @@ html[data-theme="white"] footer{background:rgba(255,250,240,.62);border-color:rg
   .sword-grid{grid-template-columns:minmax(220px,320px)}
   .gate-kanji{font-size:100px}.gate-title{font-size:24px;letter-spacing:6px}
 }
+
+
+
+/* ===== BUG FIX: synced VS line + reliable choose-side layout ===== */
+/* This overrides the old flex gate. The split line and the side widths now use the same variable. */
+
+.gate {
+  display: grid !important;
+  grid-template-columns: var(--black-width, 50%) calc(100% - var(--black-width, 50%)) !important;
+  --black-width: 50%;
+  transition: opacity 1s ease, visibility 1s ease, grid-template-columns 1s cubic-bezier(.7,0,.18,1) !important;
+}
+
+.gate-side {
+  min-width: 0 !important;
+  width: 100% !important;
+  height: 100vh !important;
+  flex: none !important;
+  transition: filter .7s ease !important;
+}
+
+.gate:hover .gate-side,
+.gate:hover .gate-side:hover {
+  flex: none !important;
+}
+
+.gate:has(.gate-black:hover) {
+  --black-width: 68%;
+}
+
+.gate:has(.gate-white:hover) {
+  --black-width: 32%;
+}
+
+.gate-divider {
+  left: var(--black-width, 50%) !important;
+  transition: left 1s cubic-bezier(.7,0,.18,1) !important;
+}
+
+.gate-vs {
+  left: var(--black-width, 50%) !important;
+  transition: left 1s cubic-bezier(.7,0,.18,1), transform .35s ease !important;
+}
+
+/* Make the click target fully reliable */
+.gate-side,
+.gate-side * {
+  pointer-events: auto;
+}
+
+.gate-side::before,
+.gate-side::after {
+  pointer-events: none !important;
+}
+
+/* When hidden, never block the site */
+.gate.hide {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
